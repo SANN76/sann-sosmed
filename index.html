@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SANN — Suntik All Sosmed Termurah</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🔥 SUNTIK ALL SOSMED 🔥</h1>
+  <p class="brand">BY SANN</p>
+  <p class="tagline">Mulai dari <b>500 perak</b> aja!</p>
+</header>
+
+<main class="container">
+
+  <section id="step1" class="card">
+    <h2>1. Pilih Platform</h2>
+    <div class="platform-grid">
+      <button class="platform" data-platform="tiktok">
+        <span>🎵</span><p>TikTok</p>
+      </button>
+      <button class="platform" data-platform="instagram">
+        <span>📸</span><p>Instagram</p>
+      </button>
+      <button class="platform" data-platform="whatsapp">
+        <span>💬</span><p>Channel WhatsApp</p>
+      </button>
+    </div>
+  </section>
+
+  <section id="step2" class="card hidden">
+    <h2>2. Pilih Layanan</h2>
+    <div id="serviceList" class="service-list"></div>
+    <button class="btn-back" onclick="backToPlatform()">← Kembali</button>
+  </section>
+
+  <section id="step3" class="card hidden">
+    <h2>3. Detail Pesanan</h2>
+    <div class="summary">
+      <p>Layanan: <b id="sumService">-</b></p>
+      <p>Jumlah: <b id="sumQty">-</b></p>
+      <p>Total: <b id="sumPrice">-</b></p>
+    </div>
+
+    <label>Link / Username Target</label>
+    <input type="text" id="target" placeholder="https://tiktok.com/@username" />
+
+    <label>Nama / WhatsApp kamu</label>
+    <input type="text" id="buyer" placeholder="08xxxxxxxxxx" />
+
+    <h3>Metode Pembayaran</h3>
+    <div class="pay-options">
+      <label><input type="radio" name="pay" value="QRIS" checked/> QRIS</label>
+      <label><input type="radio" name="pay" value="DANA"/> DANA</label>
+    </div>
+
+    <div id="qrisBox" class="qris-box">
+      <img src="assets/qris.png" alt="QRIS"/>
+      <p>Scan QRIS di atas, lalu upload bukti transfer di bawah.</p>
+    </div>
+
+    <div id="danaBox" class="dana-box hidden">
+      <p>Transfer ke DANA:</p>
+      <p class="dana-number">085182973247</p>
+      <p>a.n. Admin SANN</p>
+    </div>
+
+    <label>Upload Bukti Transfer</label>
+    <input type="file" id="proof" accept="image/*"/>
+
+    <button class="btn-primary" onclick="submitOrder()">Kirim Pesanan 🚀</button>
+    <button class="btn-back" onclick="backToService()">← Kembali</button>
+  </section>
+
+  <section id="step4" class="card hidden success">
+    <h2>✅ Pesanan Diterima!</h2>
+    <p>Nomor Antrian kamu:</p>
+    <div id="queueNumber" class="queue">#000</div>
+    <p>Simpan nomor ini. Admin akan segera memproses.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚡ Cepat — Aman — Terpercaya ⚡</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
