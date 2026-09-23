@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Order SANN</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .order-item {
+    background: rgba(30,20,60,0.7);
+    border: 1px solid #4a2a7a;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .order-item h3 { color: #ffcc00; margin-bottom: 8px; }
+  .order-item p { font-size: 14px; color: #ccc; margin: 3px 0; }
+  .order-item b { color: #00ffaa; }
+  .order-item img { max-width: 200px; border-radius: 8px; margin-top: 8px; }
+  .refresh-btn {
+    width: 100%; padding: 12px; margin-bottom: 16px;
+    background: linear-gradient(90deg,#00cc66,#00ffaa);
+    border: none; border-radius: 10px; color: #000;
+    font-weight: bold; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h2>🛠️ Admin Panel — Daftar Order</h2>
+    <button class="refresh-btn" onclick="loadOrders()">🔄 Refresh Data</button>
+    <div id="orders"><p>Memuat...</p></div>
+  </div>
+</div>
+
+<script>
+async function loadOrders() {
+  const res = await fetch("/.netlify/functions/list");
+  const data = await res.json();
+  const box = document.getElementById("orders");
+
+  if (!data.length) { box.innerHTML = "<p>Belum ada orderan.</p>"; return; }
+
+  box.innerHTML = data.map(o => `
+    <div class="order-item">
+      <h3>Antrian #${String(o.queue).padStart(3,"0")}</h3>
+      <p>Platform: <b>${o.platform}</b></p>
+      <p>Layanan: <b>${o.layanan}</b></p>
+      <p>Harga: <b>Rp ${o.harga.toLocaleString("id-ID")}</b></p>
+      <p>Target: <b>${o.target}</b></p>
+      <p>Pembeli: <b>${o.buyer}</b></p>
+      <p>Bayar: <b>${o.pay}</b></p>
+      <p>Waktu: ${new Date(o.waktu).toLocaleString("id-ID")}</p>
+      <img src="${o.bukti}" alt="bukti"/>
+    </div>
+  `).join("");
+}
+loadOrders();
+</script>
+</body>
+</html>
